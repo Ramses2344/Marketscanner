@@ -1,39 +1,107 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="en"><head>
+<html class="dark" lang="en">
+<head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>LUMINA | MARKETSCANNER</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "tertiary": "#fff9f8",
-                        "on-primary": "#003911",
-                        "surface-container-low": "#1b1b1d",
-                        "surface-tint": "#53e16f",
-                        "on-tertiary-fixed-variant": "#930007",
-                        "on-secondary-fixed": "#2b1700",
-                        "on-surface-variant": "#b9cbb8",
-                        "error-container": "#93000a",
-                        "on-secondary": "#482900",
-                        "secondary-container": "#fa9b00",
-                        "inverse-on-surface": "#303032",
-                        "surface-container-high": "#2a2a2c",
-                        "on-surface": "#e4e2e4",
-                        "secondary": "#ffc07a",
-                        "on-error": "#690005",
-                        "on-primary-fixed-variant": "#00531c",
-                        "primary-fixed-dim": "#53e16f",
-                        "primary-fixed": "#72fe88",
-                        "surface-container-highest": "#353437",
-                        "secondary-fixed-dim": "#ffb868",
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MARKETSCANNER</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet"/>
+
+<style>
+body {
+  font-family: 'Inter', sans-serif;
+}
+</style>
+
+</head>
+
+<body class="bg-[#0b0b0f] text-white">
+
+<!-- HEADER -->
+
+<header class="flex justify-between items-center px-8 py-6 border-b border-gray-800">
+  <div class="flex items-center gap-2 text-lg font-semibold">
+    <span>📈</span>
+    <span>MARKETSCANNER</span>
+  </div>
+
+  <div class="flex gap-6 text-sm text-gray-400">
+    <span>Markets</span>
+    <span>Insights</span>
+    <span>Signals</span>
+    <span>Watchlist</span>
+  </div>
+</header>
+
+<!-- HERO -->
+
+<section class="text-center py-16">
+  <h1 class="text-4xl font-bold mb-4">
+    Should you trade today?
+  </h1>
+  <p class="text-gray-400">
+    See the crypto market in 10 seconds.
+  </p>
+</section>
+
+<!-- MARKET STATUS -->
+
+<section class="flex justify-center">
+  <div class="bg-[#151822] p-8 rounded-2xl w-[350px] text-center">
+
+```
+<h2 class="text-xl font-semibold mb-6">Market Status</h2>
+
+<div class="mb-4">
+  <p class="text-gray-400 text-sm">Bias</p>
+  <p id="bias" class="text-2xl font-bold">Loading...</p>
+</div>
+
+<div class="mb-4">
+  <p class="text-gray-400 text-sm">Momentum</p>
+  <p id="momentum" class="text-2xl font-bold">Loading...</p>
+</div>
+
+<div class="mb-4">
+  <p class="text-gray-400 text-sm">Risk</p>
+  <p id="risk" class="text-2xl font-bold">Loading...</p>
+</div>
+
+<div>
+  <p class="text-gray-400 text-sm">Action</p>
+  <p id="action" class="text-2xl font-bold">Loading...</p>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- SCRIPT -->
+
+<script>
+async function loadMarketStatus() {
+  try {
+    const res = await fetch('/api/market-status');
+    const data = await res.json();
+
+    document.getElementById('bias').textContent = data.bias;
+    document.getElementById('momentum').textContent = data.momentum;
+    document.getElementById('risk').textContent = data.risk;
+    document.getElementById('action').textContent = data.action;
+
+  } catch (error) {
+    console.error('Error loading market status:', error);
+  }
+}
+
+loadMarketStatus();
+</script>
+
+</body>
+</html>
                         "surface-container-lowest": "#0e0e10",
                         "tertiary-container": "#ffd4ce",
                         "on-primary-container": "#00722a",
