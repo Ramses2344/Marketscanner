@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LUMINA | MARKETSCANNER</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#fff9f8",
+                        "on-primary": "#003911",
+                        "surface-container-low": "#1b1b1d",
+                        "surface-tint": "#53e16f",
+                        "on-tertiary-fixed-variant": "#930007",
+                        "on-secondary-fixed": "#2b1700",
+                        "on-surface-variant": "#b9cbb8",
+                        "error-container": "#93000a",
+                        "on-secondary": "#482900",
+                        "secondary-container": "#fa9b00",
+                        "inverse-on-surface": "#303032",
+                        "surface-container-high": "#2a2a2c",
+                        "on-surface": "#e4e2e4",
+                        "secondary": "#ffc07a",
+                        "on-error": "#690005",
+                        "on-primary-fixed-variant": "#00531c",
+                        "primary-fixed-dim": "#53e16f",
+                        "primary-fixed": "#72fe88",
+                        "surface-container-highest": "#353437",
+                        "secondary-fixed-dim": "#ffb868",
+                        "surface-container-lowest": "#0e0e10",
+                        "tertiary-container": "#ffd4ce",
+                        "on-primary-container": "#00722a",
+                        "on-error-container": "#ffdad6",
+                        "outline": "#849584",
+                        "error": "#ffb4ab",
+                        "on-background": "#e4e2e4",
+                        "primary-container": "#6dfa84",
+                        "surface": "#131315",
+                        "inverse-primary": "#006e28",
+                        "surface-container": "#1f1f21",
+                        "tertiary-fixed": "#ffdad5",
+                        "on-tertiary-fixed": "#410001",
+                        "tertiary-fixed-dim": "#ffb4aa",
+                        "surface-bright": "#39393b",
+                        "on-tertiary-container": "#c21415",
+                        "primary": "#f0ffeb",
+                        "on-secondary-fixed-variant": "#673d00",
+                        "outline-variant": "#3b4b3c",
+                        "on-primary-fixed": "#002107",
+                        "secondary-fixed": "#ffddbb",
+                        "background": "#131315",
+                        "on-secondary-container": "#623a00",
+                        "surface-dim": "#131315",
+                        "inverse-surface": "#e4e2e4",
+                        "on-tertiary": "#690004",
+                        "surface-variant": "#353437"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #131315;
+            color: #e4e2e4;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(27, 27, 29, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        .text-glow-primary {
+            text-shadow: 0 0 20px rgba(83, 225, 111, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container">
+<!-- Header (TopAppBar) -->
+<header class="fixed top-0 w-full z-50 bg-neutral-950/70 backdrop-blur-xl shadow-2xl shadow-black/40">
+<div class="flex items-center justify-between px-8 py-5 max-w-[1440px] mx-auto">
+<!-- Brand -->
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#00FF7F] text-2xl" data-icon="blur_on">blur_on</span>
+<span class="text-xl font-bold tracking-[0.3em] text-neutral-100 font-inter">MARKETSCANNER</span>
+</div>
+<!-- Navigation -->
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-[#00FF7F] font-semibold text-sm uppercase tracking-widest transition-all duration-300 ease-out" href="#">Markets</a>
+<a class="text-neutral-400 hover:text-neutral-100 text-sm uppercase tracking-widest transition-all duration-300 ease-out" href="#">Insights</a>
+<a class="text-neutral-400 hover:text-neutral-100 text-sm uppercase tracking-widest transition-all duration-300 ease-out" href="#">Signals</a>
+<a class="text-neutral-400 hover:text-neutral-100 text-sm uppercase tracking-widest transition-all duration-300 ease-out" href="#">Watchlist</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-6">
+<button class="text-neutral-400 hover:text-neutral-100 transition-transform active:scale-95">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-white/10 transition-transform active:scale-95 cursor-pointer">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="Close-up studio portrait of a professional man with neutral lighting and dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQ4IZ38jJHP1yxLCCC583rhiB9Rr8aKDhEZr85zp-Fl4JL3UdPFXnBT7MqayAJMZ66RPEjaqw1iI72xYS0a7Ij2k57EB1AC5twzFoiMwbkgXpjZAHHfX-EngaUBHqxa1OEU1szs-t7NZCiGQzpKoYsG9cI3gV0idlzjAwHq2Umns3t0-H0_VUe6S9MQdioAMp7zdouvU4MYCXlzm0_Rc-gSXYRpXMTWNnaZcSsBk9vRc4aY5ptyo9fLAhm0eiN-uheObH7hY2Nqg0Q"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-20 px-6 max-w-[1440px] mx-auto w-full">
+<!-- Hero Section -->
+<section class="mb-24 text-center">
+<h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 bg-gradient-to-b from-neutral-50 to-neutral-500 bg-clip-text text-transparent">
+                See the Crypto Market <br class="hidden md:block"/> in 10 Seconds
+            </h1>
+<p class="text-lg md:text-xl text-on-surface-variant max-w-2xl mx-auto font-light leading-relaxed">
+                Clear signals. No noise. Just the market. <br/>
+                Engineered for the silent authority in every trader.
+            </p>
+</section>
+<!-- Market Status: High-Impact Card -->
+<section class="mb-24 flex justify-center">
+<div class="w-full max-w-4xl bg-surface-container-low rounded-[2rem] p-10 md:p-16 relative overflow-hidden group">
+<!-- Decorative Ambient Glow -->
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary-fixed-dim/10 blur-[100px] rounded-full"></div>
+<div class="relative z-10 grid grid-cols-1 md:grid-cols-4 gap-12 items-center text-center">
+<div class="flex flex-col gap-2">
+<span class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Market Bias</span>
+<span class="text-3xl font-bold text-[#00FF7F] text-glow-primary">Bullish</span>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Momentum</span>
+<span class="text-3xl font-bold text-neutral-100">Strong</span>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Risk Level</span>
+<span class="text-3xl font-bold text-[#00FF7F]">Low</span>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Action</span>
+<span class="px-6 py-3 bg-primary-container text-on-primary-container rounded-full font-bold text-sm tracking-widest uppercase transition-all hover:scale-105 active:scale-95 cursor-pointer">Trade</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Core Market Grid -->
+<section class="mb-24">
+<div class="flex justify-between items-end mb-8">
+<h2 class="text-2xl font-bold tracking-tight">Core Assets</h2>
+<span class="text-sm text-on-surface-variant">Live Tracking</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- BTC -->
+<div class="bg-surface-container-high rounded-2xl p-6 transition-all hover:bg-surface-container-highest cursor-pointer group">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-orange-400" data-icon="currency_bitcoin">currency_bitcoin</span>
+</div>
+<div>
+<h3 class="font-bold">BTC</h3>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Bitcoin</p>
+</div>
+</div>
+<span class="text-xs font-bold text-[#00FF7F]">+2.4%</span>
+</div>
+<div class="mb-4">
+<span class="text-2xl font-bold">$64,321.00</span>
+</div>
+<div class="h-12 w-full flex items-end gap-1 opacity-50 group-hover:opacity-100 transition-opacity">
+<div class="flex-1 bg-primary-fixed-dim/20 h-4 rounded-t-sm"></div>
+<div class="flex-1 bg-primary-fixed-dim/20 h-6 rounded-t-sm"></div>
+<div class="flex-1 bg-primary-fixed-dim/20 h-5 rounded-t-sm"></div>
+<div class="flex-1 bg-primary-fixed-dim/20 h-8 rounded-t-sm"></div>
+<div class="flex-1 bg-primary-fixed-dim/20 h-7 rounded-t-sm"></div>
+<div class="flex-1 bg-primary-fixed-dim/20 h-10 rounded-t-sm"></div>
+<div class="flex-1 bg-primary-fixed-dim h-12 rounded-t-sm"></div>
+</div>
+</div>
+<!-- ETH -->
+<div class="bg-surface-container-high rounded-2xl p-6 transition-all hover:bg-surface-container-highest cursor-pointer group">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-indigo-500/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-indigo-400" data-icon="eth">universal_currency_alt</span>
+</div>
+<div>
+<h3 class="font-bold">ETH</h3>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Ethereum</p>
+</div>
+</div>
+<span class="text-xs font-bold text-[#00FF7F]">+1.8%</span>
+</div>
+<div class="mb-4">
+<span class="text-2xl font-bold">$3,482.50</span>
+</div>
+<div class="h-12 w-full flex items-end gap-1 opacity-50 group-hover:opacity-100 transition-opacity">
+<div class="flex-1 bg-primary-fixed-dim/20 h-6 rounded-t-sm"></div>
+<div class="flex-1 bg-primary-fixed-dim/20 h-5 rounded-t-sm"></div>
+<div class="flex-1 bg-primary-fixed-dim/20 h-8 rounded-t-sm"></div>
+<div class="flex-1 bg-primary-fixed-dim h-10 rounded-t-sm"></div>
+</div>
+</div>
+<!-- SOL -->
+<div class="bg-surface-container-high rounded-2xl p-6 transition-all hover:bg-surface-container-highest cursor-pointer group">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-cyan-500/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-cyan-400" data-icon="waves">waves</span>
+</div>
+<div>
+<h3 class="font-bold">SOL</h3>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Solana</p>
+</div>
+</div>
+<span class="text-xs font-bold text-tertiary-container text-on-tertiary-container">-0.5%</span>
+</div>
+<div class="mb-4">
+<span class="text-2xl font-bold">$145.22</span>
+</div>
+<div class="h-12 w-full flex items-end gap-1 opacity-50 group-hover:opacity-100 transition-opacity">
+<div class="flex-1 bg-error/20 h-8 rounded-t-sm"></div>
+<div class="flex-1 bg-error/20 h-9 rounded-t-sm"></div>
+<div class="flex-1 bg-error h-7 rounded-t-sm"></div>
+</div>
+</div>
+<!-- ARB -->
+<div class="bg-surface-container-high rounded-2xl p-6 transition-all hover:bg-surface-container-highest cursor-pointer group">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-400" data-icon="token">token</span>
+</div>
+<div>
+<h3 class="font-bold">ARB</h3>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Arbitrum</p>
+</div>
+</div>
+<span class="text-xs font-bold text-[#00FF7F]">+5.2%</span>
+</div>
+<div class="mb-4">
+<span class="text-2xl font-bold">$1.12</span>
+</div>
+<div class="h-12 w-full flex items-end gap-1 opacity-50 group-hover:opacity-100 transition-opacity">
+<div class="flex-1 bg-primary-fixed-dim/20 h-2 rounded-t-sm"></div>
+<div class="flex-1 bg-primary-fixed-dim h-12 rounded-t-sm"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Section: Sentiment & Explanation -->
+<section class="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Sentiment Card -->
+<div class="lg:col-span-4 bg-surface-container-low rounded-[2rem] p-10 flex flex-col justify-between items-center text-center">
+<span class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold mb-8">Fear &amp; Greed Index</span>
+<div class="relative w-48 h-48 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-highest" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-[#00FF7F]" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-dasharray="552.92" stroke-dashoffset="121.6" stroke-width="4"></circle>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="text-5xl font-black text-neutral-100">78</span>
+<span class="text-[10px] uppercase tracking-widest text-[#00FF7F] font-bold">Greed</span>
+</div>
+</div>
+<p class="mt-8 text-sm text-on-surface-variant">Market enthusiasm is accelerating. Use caution with leverage.</p>
+</div>
+<!-- Market Explanation & Liquidation Signal -->
+<div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Explanation -->
+<div class="bg-surface-container-low rounded-[2rem] p-10">
+<h3 class="text-xl font-bold mb-8">Why is the market moving?</h3>
+<ul class="space-y-6">
+<li class="flex gap-4">
+<span class="material-symbols-outlined text-[#00FF7F] mt-1" data-icon="check_circle">check_circle</span>
+<p class="text-sm text-on-surface-variant leading-relaxed"><strong class="text-neutral-100">ETF Inflows:</strong> Institutional demand for Spot BTC remains at all-time highs for the 3rd consecutive week.</p>
+</li>
+<li class="flex gap-4">
+<span class="material-symbols-outlined text-[#00FF7F] mt-1" data-icon="check_circle">check_circle</span>
+<p class="text-sm text-on-surface-variant leading-relaxed"><strong class="text-neutral-100">Macro Outlook:</strong> Recent inflation data supports a "soft landing" narrative, boosting risk-on assets.</p>
+</li>
+</ul>
+</div>
+<!-- Liquidation Signal -->
+<div class="bg-surface-container-low rounded-[2rem] p-10 flex flex-col justify-between">
+<div>
+<h3 class="text-xl font-bold mb-2">Liquidation Signal</h3>
+<p class="text-sm text-on-surface-variant">Real-time pressure analysis</p>
+</div>
+<div class="py-12 flex flex-col items-center gap-4">
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden flex">
+<div class="h-full bg-error w-[15%]"></div>
+<div class="h-full bg-primary-fixed-dim w-[85%]"></div>
+</div>
+<div class="flex justify-between w-full text-[10px] font-bold uppercase tracking-widest">
+<span class="text-error">Shorts</span>
+<span class="text-primary-fixed-dim">Longs</span>
+</div>
+<h4 class="text-2xl font-bold mt-4 text-[#00FF7F]">Shorts getting squeezed</h4>
+</div>
+<p class="text-xs text-on-surface-variant italic">High probability of a volatility spike in the next 4 hours.</p>
+</div>
+</div>
+</section>
+<!-- Top Movers -->
+<section class="mb-24">
+<h2 class="text-2xl font-bold tracking-tight mb-8">Top Movers</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<!-- Gainers -->
+<div>
+<span class="text-[10px] uppercase tracking-[0.2em] text-[#00FF7F] font-bold mb-4 block">Top Gainers</span>
+<div class="space-y-3">
+<div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-[#00FF7F] font-bold text-xs">PE</div>
+<span class="font-bold">PEPE</span>
+</div>
+<span class="text-[#00FF7F] font-bold text-sm">+24.5%</span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-[#00FF7F] font-bold text-xs">RA</div>
+<span class="font-bold">RENDER</span>
+</div>
+<span class="text-[#00FF7F] font-bold text-sm">+18.2%</span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-[#00FF7F] font-bold text-xs">IN</div>
+<span class="font-bold">INJ</span>
+</div>
+<span class="text-[#00FF7F] font-bold text-sm">+12.1%</span>
+</div>
+</div>
+</div>
+<!-- Losers -->
+<div>
+<span class="text-[10px] uppercase tracking-[0.2em] text-tertiary-container text-on-tertiary-container font-bold mb-4 block">Top Losers</span>
+<div class="space-y-3">
+<div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-error/10 flex items-center justify-center text-error font-bold text-xs">SN</div>
+<span class="font-bold">SNX</span>
+</div>
+<span class="text-error font-bold text-sm">-14.2%</span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-error/10 flex items-center justify-center text-error font-bold text-xs">MA</div>
+<span class="font-bold">MATIC</span>
+</div>
+<span class="text-error font-bold text-sm">-9.8%</span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-error/10 flex items-center justify-center text-error font-bold text-xs">LI</div>
+<span class="font-bold">LTC</span>
+</div>
+<span class="text-error font-bold text-sm">-7.5%</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-neutral-950 w-full py-20 mt-auto border-t border-white/5">
+<div class="max-w-[1440px] mx-auto px-8 flex flex-col items-center gap-10">
+<div class="flex items-center gap-3 grayscale opacity-50">
+<span class="material-symbols-outlined text-neutral-100" data-icon="blur_on">blur_on</span>
+<span class="font-bold text-neutral-300 tracking-[0.3em]">MARKETSCANNER</span>
+</div>
+<nav class="flex flex-wrap justify-center gap-12">
+<a class="text-xs text-neutral-600 hover:text-[#00FF7F] uppercase tracking-widest transition-colors" href="#">Privacy</a>
+<a class="text-xs text-neutral-600 hover:text-[#00FF7F] uppercase tracking-widest transition-colors" href="#">Terms</a>
+<a class="text-xs text-neutral-600 hover:text-[#00FF7F] uppercase tracking-widest transition-colors" href="#">API</a>
+<a class="text-xs text-neutral-600 hover:text-[#00FF7F] uppercase tracking-widest transition-colors" href="#">Support</a>
+</nav>
+<p class="text-[10px] text-neutral-500 font-inter uppercase tracking-widest text-center">
+                © 2024 Lumina Market Intelligence. The Silent Authority.
+            </p>
+</div>
+</footer>
+<!-- Fixed Floating Action Button (FAB) Suppression (Hidden by Rule) -->
+</body></html>
